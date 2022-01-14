@@ -1,0 +1,11 @@
+article {
+    width: calc((100% / 3) - (20px * 2));
+    min-width: 350px;
+    max-width: 400px;
+    margin: 20px;
+    box-shadow: 0 0 20px #e84393;
+}
+article h3 {
+    text-align: center;
+}
+
