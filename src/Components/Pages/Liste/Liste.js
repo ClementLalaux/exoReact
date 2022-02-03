@@ -1,56 +1,29 @@
-import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import {Button, Text, View} from 'react-native';
+import React, {useState} from 'react';
 
-const DATA = [
-  {
-    id: '1',
-    nom: 'Louis',
-  },
-  {
-    id: '2',
-    nom: 'Jeanne',
-  },
-  {
-    id: '3',
-    nom: 'Clément',
-  },
-];
+const Ajout = ({navigation}) => {
+  const [user, setUser] = useState([]);
 
-const Item = ({ nom }) => (
-  <View style={styles.item}>
-    <Text style={styles.nom}>{nom}</Text>
-  </View>
-);
+  const ajouterUser = (e) => {
+    setUser([...user, e]);
+  };
 
-const Liste = ({ navigation }) => {
-
-
-  const renderItem = ({ item }) => (
-    <Item title={item.title} />
-  );
+  const handleAjouterUser = () => {
+    navigation.navigate('Ajout', {ajouterUser: ajouterUser});
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
+    <View>
+      {user.map(e => (
+        <View>
+          <Text>
+            {e.nom}
+          </Text>
+        </View>
+      ))}
+      <Button title="Ajouter" onPress={handleAjouterUser} />
+    </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  nom: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  }
-});
-
-export default Liste;
+export default Ajout;

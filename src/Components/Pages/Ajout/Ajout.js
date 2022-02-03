@@ -1,46 +1,27 @@
-import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
+import {Button, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 
-const Ajout = ({ navigation }) => {
-    const goTo = () => navigation.navigate("Liste", {name : name});
-
-  const [name, setName] = useState('');
-  const handlePress = input => {
-    setName(input);
+export const AddUser = ({navigation}) => {
+  const [nom, setNom] = useState('');
+  const handleNom = value => {
+    setNom(value);
   };
 
+  const ajoutUser = () => {
+    route.params.ajouterUser({
+      nom: nom,
+    });
+    navigation.navigate("Liste");
+  };
 
   return (
-    <View style={styles.body}>
+    <View>
       <TextInput
-        placeholder="Saisir un nom a ajouter"
-        style={styles.input}
-        maxLength={300}
+        onChangeText={handleNom}
+        placeholder="Nom"
         keyboardType="default"
-        multiline={true}
       />
-      <Pressable onPress={handlePress}>
-        <Text>Ajouter une personne</Text>
-      </Pressable>
-      <Pressable onPress={goTo}>
-        <Text>Aller sur la page Liste</Text>
-      </Pressable>
+      <Button title="Ajouter un utilisateur" onPress={ajoutUser} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 25,
-    color: 'blue',
-  },
-  input: {
-    width: 300,
-  },
-});
-
-export default Ajout;
